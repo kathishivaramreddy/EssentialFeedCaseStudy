@@ -26,20 +26,27 @@ public class RemoteFeedLoader {
         self.client = client
     }
     
-    public func load(completion: @escaping (RemoteFeedLoader.Error) -> Void) {
+    public func load(completion: @escaping (Result) -> Void) {
         
         client.get(from: self.url) { result in
             
             switch result {
                 
-                case .success:                    
-                    completion(.invalidResponse)
+                case .success:
+                    completion(.failure(.invalidResponse))
                 case .failure:
-                    completion(.connectivity)
+                    completion(.failure(.connectivity))
             }
         }
     }
+    
+    public enum Result: Equatable {
+        
+        case success([FeedItem])
+        case failure(Error)
+    }
 }
+
 
 public enum HTTPClientResponse {
     

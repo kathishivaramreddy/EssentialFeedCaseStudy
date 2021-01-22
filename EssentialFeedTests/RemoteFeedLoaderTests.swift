@@ -95,14 +95,14 @@ class RemoteFeedLoaderTests: XCTestCase {
     
     private func expect(sut: RemoteFeedLoader, withCapturedError: RemoteFeedLoader.Error, action: () -> Void,  file: StaticString = #filePath, line: UInt = #line) {
         
-        var capturedErrors =  [RemoteFeedLoader.Error]()
+        var capturedResults =  [RemoteFeedLoader.Result]()
         
        
-        sut.load { capturedErrors.append($0) }
+        sut.load { capturedResults.append($0) }
                 
         action()
         
-        XCTAssertEqual(capturedErrors, [withCapturedError], file: file, line: line)
+        XCTAssertEqual(capturedResults, [.failure(withCapturedError)], file: file, line: line)
         
     }
     

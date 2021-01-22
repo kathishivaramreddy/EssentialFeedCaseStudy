@@ -6,7 +6,7 @@
 //
 
 
-struct FeedItem {
+public struct FeedItem: Equatable {
     
     let id: UUID
     let description: String?
