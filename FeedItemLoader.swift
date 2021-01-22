@@ -11,21 +11,14 @@ struct FeedItemLoader {
     
     private static var OK_200 = 200
     
-    static func feedloader(data: Data, response: HTTPURLResponse) throws -> [FeedItem] {
-        
-        guard response.statusCode == OK_200 else {
-            
-            throw RemoteFeedLoader.Error.invalidResponse
-        }
-        
-        let root = try JSONDecoder().decode(Root.self, from: data)
-        
-        return root.items.map { $0.feedItem }
-    }
-    
     public struct Root: Decodable {
         
         let items: [Item]
+        
+        var feed: [FeedItem] {
+            
+            items.map { $0.feedItem }
+        }
     }
 
     public struct Item: Decodable {
@@ -44,5 +37,16 @@ struct FeedItemLoader {
         }
     }
 
+    static func map(_ data: Data, _ response: HTTPURLResponse) -> RemoteFeedLoader.Result {
+        
+        guard response.statusCode == OK_200
+              , let root = try? JSONDecoder().decode(Root.self, from: data)
+        else {
+            
+            return .failure(RemoteFeedLoader.Error.invalidResponse)
+        }
+        
+        return .success(root.feed)
+    }
 }
 
