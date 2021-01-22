@@ -15,6 +15,7 @@
 		F7FC02CF25B8B5CE009A0826 /* RemoteFeedLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02CE25B8B5CE009A0826 /* RemoteFeedLoaderTests.swift */; };
 		F7FC02E425B9B991009A0826 /* RemoteFeedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02E325B9B991009A0826 /* RemoteFeedLoader.swift */; };
 		F7FC02EB25BB094C009A0826 /* HTTPClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02EA25BB094C009A0826 /* HTTPClient.swift */; };
+		F7FC02EF25BB0970009A0826 /* FeedItemLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02EE25BB0970009A0826 /* FeedItemLoader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,6 +40,7 @@
 		F7FC02CE25B8B5CE009A0826 /* RemoteFeedLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoaderTests.swift; sourceTree = "<group>"; };
 		F7FC02E325B9B991009A0826 /* RemoteFeedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteFeedLoader.swift; sourceTree = "<group>"; };
 		F7FC02EA25BB094C009A0826 /* HTTPClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPClient.swift; sourceTree = "<group>"; };
+		F7FC02EE25BB0970009A0826 /* FeedItemLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemLoader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 		F7FC029D25B8B0BD009A0826 = {
 			isa = PBXGroup;
 			children = (
+				F7FC02EE25BB0970009A0826 /* FeedItemLoader.swift */,
 				F7FC02EA25BB094C009A0826 /* HTTPClient.swift */,
 				F7FC02A925B8B0BD009A0826 /* EssentialFeed */,
 				F7FC02B425B8B0BE009A0826 /* EssentialFeedTests */,
@@ -230,6 +233,7 @@
 				F7FC02E425B9B991009A0826 /* RemoteFeedLoader.swift in Sources */,
 				F7FC02EB25BB094C009A0826 /* HTTPClient.swift in Sources */,
 				F7FC02C425B8B0C9009A0826 /* FeedItem.swift in Sources */,
+				F7FC02EF25BB0970009A0826 /* FeedItemLoader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
