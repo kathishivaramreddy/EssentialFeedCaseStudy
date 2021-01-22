@@ -54,18 +54,6 @@ public class RemoteFeedLoader {
     }
 }
 
-
-public enum HTTPClientResponse {
-    
-    case success(Data, HTTPURLResponse)
-    case failure(Error)
-}
-
-public protocol HTTPClient {
-    
-    func get(from url: URL, completion: @escaping (HTTPClientResponse) -> Void)
-}
-
 private struct FeedItemLoader {
     
     private static var OK_200 = 200
