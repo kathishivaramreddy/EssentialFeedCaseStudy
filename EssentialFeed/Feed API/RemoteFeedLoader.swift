@@ -18,7 +18,7 @@ public class RemoteFeedLoader: FeedLoader {
         case invalidResponse
     }
     
-    public typealias Result = LoadFeedResult<Error>
+    public typealias Result = LoadFeedResult
     
     public init(url: URL, client: HTTPClient) {
         
