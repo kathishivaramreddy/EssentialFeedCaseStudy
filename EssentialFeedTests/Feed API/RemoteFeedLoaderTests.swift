@@ -44,7 +44,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let url = URL(string: "https://a-example.com")!
         let (sut, client) = makeSUT(url: url)
         
-        expect(sut: sut, withCaptured: .failure(RemoteFeedLoader.Error.connectivity)) {
+        expect(sut: sut, withCaptured: failure(.connectivity)) {
             
             let clientError = NSError(domain: "Test", code: 0, userInfo: nil)
             
@@ -63,7 +63,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let data = makeJson(withItems: [])
         samples.enumerated().forEach { index, code in
             
-            self.expect(sut: sut, withCaptured: .failure(RemoteFeedLoader.Error.invalidResponse)) {
+            self.expect(sut: sut, withCaptured: failure(.invalidResponse)) {
                 
                 client.complete(withStatus: code
                                 , data: data
@@ -77,7 +77,7 @@ class RemoteFeedLoaderTests: XCTestCase {
         let url = URL(string: "https://a-example.com")!
         let (sut, client) = makeSUT(url: url)
         
-        expect(sut: sut, withCaptured: .failure(RemoteFeedLoader.Error.invalidResponse)) {
+        expect(sut: sut, withCaptured: failure(.invalidResponse)) {
             
             let invalidJson = Data("Invalid JSON".utf8)
             
@@ -186,6 +186,11 @@ class RemoteFeedLoaderTests: XCTestCase {
         action()
         
         wait(for: [exp], timeout: 1.0)
+    }
+    
+    private func failure(_ error: RemoteFeedLoader.Error) -> RemoteFeedLoader.Result {
+        
+        return .failure(error)
     }
     
     private func makeItem(id: UUID, description: String? = nil, location: String? = nil , imageURL: URL) -> (model: FeedItem, json: [String: Any]){
