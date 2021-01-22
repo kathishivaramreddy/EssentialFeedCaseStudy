@@ -34,12 +34,10 @@ public class RemoteFeedLoader {
                 
                 case let .success(data, response):
                     
-                    if response.statusCode == 200, let root = try? JSONDecoder().decode(Root.self, from: data) {
-                        
-                        completion(.success(
-                            root.items.map { $0.feedItem }
-                        ))
-                    } else {
+                    do {
+                        let items = try FeedItemLoader.feedloader(data: data, response: response)
+                        completion(.success(items))
+                    } catch {
                         
                         completion(.failure(.invalidResponse))
                     }
@@ -68,23 +66,42 @@ public protocol HTTPClient {
     func get(from url: URL, completion: @escaping (HTTPClientResponse) -> Void)
 }
 
-public struct Root: Decodable {
+private struct FeedItemLoader {
     
-    let items: [Item]
+    private static var OK_200 = 200
+    
+    static func feedloader(data: Data, response: HTTPURLResponse) throws -> [FeedItem] {
+        
+        guard response.statusCode == OK_200 else {
+            
+            throw RemoteFeedLoader.Error.invalidResponse
+        }
+        
+        let root = try JSONDecoder().decode(Root.self, from: data)
+        
+        return root.items.map { $0.feedItem }
+    }
+    
+    public struct Root: Decodable {
+        
+        let items: [Item]
+    }
+
+    public struct Item: Decodable {
+        
+        let id: UUID
+        let description: String?
+        let location: String?
+        let image: URL
+        
+        var feedItem: FeedItem {
+            
+            return FeedItem(id: id
+                            , description: description
+                            , location: location
+                            , imageURL: image)
+        }
+    }
+
 }
 
-public struct Item: Decodable {
-    
-    let id: UUID
-    let description: String?
-    let location: String?
-    let image: URL
-    
-    var feedItem: FeedItem {
-        
-        return FeedItem(id: id
-                        , description: description
-                        , location: location
-                        , imageURL: image)
-    }
-}
