@@ -50,10 +50,7 @@ class URLSessionHTTPClientTests: XCTestCase {
     
     func test_getFromURL_requestsWithGivenURL() {
         
-        
-        
         let url = URL(string: "https://given-url.com")!
-        let sut = URLSessionHTTPClient()
         let exp = expectation(description: "given expectation")
         
         URLProtocolStub.observeRequest { request in
@@ -64,14 +61,13 @@ class URLSessionHTTPClientTests: XCTestCase {
             exp.fulfill()
         }
         
-        sut.get(from: url) { (_) in }
+        makeSUT().get(from: url) { (_) in }
         
         wait(for: [exp], timeout: 1.0)
     }
         
     func test_getFromURL_failsOnRequestError() {
         
-        let sut = URLSessionHTTPClient()
         let error = NSError(domain: "any error", code: 0)
         
         let url = URL(string: "https://any-url.com")!
@@ -81,7 +77,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         let exp = expectation(description: "any expectation")
         
-        sut.get(from: url) { result in
+        makeSUT().get(from: url) { result in
             
             switch result {
                 
@@ -98,6 +94,11 @@ class URLSessionHTTPClientTests: XCTestCase {
     }
     
     //Mark:- Helper
+    
+    private func makeSUT() -> URLSessionHTTPClient {
+        
+        return URLSessionHTTPClient()
+    }
     
     private class URLProtocolStub: URLProtocol {
                 
