@@ -47,7 +47,7 @@ class URLSessionHTTPClientTests: XCTestCase {
         
         let error = anyNSError()
         
-        guard let receivedError = resultErrorFor(data: nil, response: nil, error: error) as? NSError else {
+        guard let receivedError = resultErrorFor(data: nil, response: nil, error: error) as NSError? else {
             
             XCTFail()
             return
