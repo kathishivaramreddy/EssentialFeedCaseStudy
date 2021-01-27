@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F7D605A425C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D605A325C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift */; };
 		F7FC02B125B8B0BE009A0826 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */; };
 		F7FC02B825B8B0BE009A0826 /* EssentialFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = F7FC02AA25B8B0BD009A0826 /* EssentialFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F7FC02C425B8B0C9009A0826 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02C325B8B0C9009A0826 /* FeedItem.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F7D605A325C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FC02AA25B8B0BD009A0826 /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
 		F7FC02AB25B8B0BD009A0826 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -87,6 +89,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F7D605A225C1FBD300B2AE07 /* Feed Cache */ = {
+			isa = PBXGroup;
+			children = (
+				F7D605A325C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift */,
+			);
+			path = "Feed Cache";
+			sourceTree = "<group>";
+		};
 		F7FC029D25B8B0BD009A0826 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				F7FC02B725B8B0BE009A0826 /* Info.plist */,
+				F7D605A225C1FBD300B2AE07 /* Feed Cache */,
 				F7FC02F225BB395D009A0826 /* Feed API */,
 				F7FC02FB25BB58B8009A0826 /* URLSessionHTTPClientTests.swift */,
 				F7FC030325BBF0DA009A0826 /* Helper */,
@@ -335,6 +346,7 @@
 			files = (
 				F7FC02CF25B8B5CE009A0826 /* LoadFeedFromRemoteUseCaseTests.swift in Sources */,
 				F7FC030025BBF091009A0826 /* XCTest+MemoryLeak.swift in Sources */,
+				F7D605A425C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift in Sources */,
 				F7FC02FC25BB58B8009A0826 /* URLSessionHTTPClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
