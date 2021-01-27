@@ -20,8 +20,13 @@ class FeedStore {
         deleteCacheFeedCallCount += 1
     }
     
-    func completeDeletion(with: NSError, at index: Int = 0) {
+    func completeDeletion(with error: NSError, at index: Int = 0) {
         
+    }
+    
+    func completeDeletionSuccessfully() {
+        
+        insertCacheFeedCallCount += 1
     }
 }
 
@@ -70,6 +75,19 @@ class CacheFeedUseCaseTests: XCTestCase {
         store.completeDeletion(with: deletionError)
         
         XCTAssertEqual(store.insertCacheFeedCallCount, 0)
+    }
+    
+    func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
+        
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        
+        let items = [uniqueItem()]
+        sut.save(items: items)
+        
+        store.completeDeletionSuccessfully()
+        
+        XCTAssertEqual(store.insertCacheFeedCallCount, 1)
     }
     
     //Marker: Helpers
