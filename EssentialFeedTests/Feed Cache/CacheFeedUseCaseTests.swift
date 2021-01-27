@@ -12,19 +12,30 @@ import EssentialFeed
 
 class FeedStore {
     
+    typealias DeletionCompletion = (Error?) -> Void
+    
     var deleteCacheFeedCallCount = 0
     var insertCacheFeedCallCount = 0
     
-    func deleteCacheFeed() {
+    private var deletionCompletions = [DeletionCompletion]()
+    
+    func deleteCacheFeed(completion: @escaping (Error?) -> Void) {
         
         deleteCacheFeedCallCount += 1
+        deletionCompletions.append(completion)
     }
     
-    func completeDeletion(with error: NSError, at index: Int = 0) {
+    func completeDeletion(with error: Error, at index: Int = 0) {
         
+        deletionCompletions[index](error)
     }
     
-    func completeDeletionSuccessfully() {
+    func completeDeletionSuccessfully(at index: Int = 0) {
+        
+        deletionCompletions[index](nil)
+    }
+    
+    func insert(items: [FeedItem]) {
         
         insertCacheFeedCallCount += 1
     }
@@ -33,15 +44,23 @@ class FeedStore {
 class LocalFeedLoader {
     
     let store: FeedStore
+    let items: [FeedItem]
     
-    init(store: FeedStore) {
+    init(store: FeedStore, items: [FeedItem]) {
         
         self.store = store
+        self.items = items
     }
     
     func save(items: [FeedItem]) {
         
-        store.deleteCacheFeed()
+        store.deleteCacheFeed { [unowned self] error in
+            
+            if error == nil {
+                
+                self.store.insert(items: items)
+            }
+        }
     }
 }
 
@@ -80,7 +99,6 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_requestsNewCacheInsertionOnSuccessfulDeletion() {
         
         let (sut, store) = makeSUT()
-        let deletionError = anyNSError()
         
         let items = [uniqueItem()]
         sut.save(items: items)
@@ -95,7 +113,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStore) {
         
         let store = FeedStore()
-        let sut = LocalFeedLoader(store: store)
+        let sut = LocalFeedLoader(store: store, items: [uniqueItem()])
         
         trackMemoryLeak(sut, file: file, line: line)
         trackMemoryLeak(store, file: file, line: line)
