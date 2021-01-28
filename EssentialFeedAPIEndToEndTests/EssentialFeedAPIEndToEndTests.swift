@@ -58,9 +58,9 @@ class EssentialFeedAPIEndToEndTests: XCTestCase {
         return loadFeedResult
     }
     
-    private func expectedItem(at index: Int) -> FeedItem {
+    private func expectedItem(at index: Int) -> FeedImage {
         
-        return FeedItem(
+        return FeedImage(
             id: id(at: index),
             description: description(at: index),
             location: location(at: index),
