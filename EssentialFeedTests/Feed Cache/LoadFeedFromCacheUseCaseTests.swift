@@ -48,6 +48,21 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
             store.completeRetrievalWithEmptyCache()
         }
     }
+    
+    func test_load_deliverCacheImageOnLessThanSevenDaysCache() {
+        
+        let currentDate = Date()
+        
+        let (sut, store) = makeSUT(currentDate: { currentDate })
+        
+        let feed = uniqueItems()
+        
+        let lessThanSevenDays = currentDate.adding(days: -7).adding(seconds: 1)
+        expect(sut, withCompletion: .success(feed.models)) {
+            
+            store.completeRetrievalWith(localFeed: feed.localItems, timeStamp: lessThanSevenDays)
+        }
+    }
 
     //Marker: Helpers
     
@@ -103,5 +118,17 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
         NSError(domain: "any error", code: 0, userInfo: nil)
     }
+}
 
+extension Date {
+    
+    func adding(days: Int) -> Date {
+        
+        return Calendar(identifier: .gregorian).date(byAdding: .day, value: days, to: self)!
+    }
+    
+    func adding(seconds: TimeInterval) -> Date {
+        
+        return self + seconds
+    }
 }
