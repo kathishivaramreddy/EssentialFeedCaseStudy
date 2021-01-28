@@ -64,7 +64,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         }
     }
     
-    func test_load_deliverErrorImageOnMoreThanSevenDaysCache() {
+    func test_load_deliverErrorImageOnSevenDaysCache() {
         
         let currentDate = Date()
         
@@ -72,7 +72,22 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
 
         let feed = uniqueItems()
             
-        let lessThanSevenDays = currentDate.adding(days: -7)
+        let morethanSevenDays = currentDate.adding(days: -7)
+        expect(sut, withCompletion: .success([])) {
+            
+            store.completeRetrievalWith(localFeed: feed.localItems, timeStamp: morethanSevenDays)
+        }
+    }
+    
+    func test_load_deliverEmptyImageOnMoreThanSevenDaysCache() {
+        
+        let currentDate = Date()
+        
+        let (sut, store) = makeSUT(currentDate: { currentDate })
+
+        let feed = uniqueItems()
+            
+        let lessThanSevenDays = currentDate.adding(days: -7).adding(seconds: -1)
         expect(sut, withCompletion: .success([])) {
             
             store.completeRetrievalWith(localFeed: feed.localItems, timeStamp: lessThanSevenDays)
