@@ -64,9 +64,14 @@ public final class LocalFeedLoader {
         }
     }
     
+    private var maxCacheAgeInDays: Int {
+        
+        return 7
+    }
+    
     private func validate(_ timeStamp: Date) -> Bool {
         
-        guard let maxCacheAge = Calendar(identifier: .gregorian).date(byAdding: .day, value: 7, to: timeStamp) else { return false }
+        guard let maxCacheAge = Calendar(identifier: .gregorian).date(byAdding: .day, value: maxCacheAgeInDays, to: timeStamp) else { return false }
         return currentDate() < maxCacheAge
     }
 }
