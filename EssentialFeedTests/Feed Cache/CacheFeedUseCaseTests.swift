@@ -59,9 +59,11 @@ class LocalFeedLoader {
         self.currentDate = currentDate
     }
     
-    func save(items: [FeedItem]) {
+    func save(items: [FeedItem], completion: @escaping (Error?) -> ()) {
         
         store.deleteCacheFeed { [unowned self] error in
+            
+            completion(error)
             
             if error == nil {
                 
@@ -85,7 +87,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT()
         
         let items = [uniqueItem()]
-        sut.save(items: items)
+        sut.save(items: items) { _ in }
         
         XCTAssertEqual(store.receivedMessage, [.deletion])
     }
@@ -96,7 +98,7 @@ class CacheFeedUseCaseTests: XCTestCase {
         let deletionError = anyNSError()
         
         let items = [uniqueItem()]
-        sut.save(items: items)
+        sut.save(items: items) { _ in }
         
         store.completeDeletion(with: deletionError)
         
@@ -110,10 +112,32 @@ class CacheFeedUseCaseTests: XCTestCase {
         let (sut, store) = makeSUT(currentDate: { return timeStamp })
         
         let items = [uniqueItem(), uniqueItem()]
-        sut.save(items: items)
+        sut.save(items: items) { _ in }
         
         store.completeDeletionSuccessfully()
         XCTAssertEqual(store.receivedMessage, [.deletion, .insertion(items: items, date: timeStamp)])
+    }
+    
+    func test_save_failsOnDeletionError() {
+        
+        let (sut, store) = makeSUT()
+        let deletionError = anyNSError()
+        
+        let items = [uniqueItem()]
+        var receivedError: Error?
+        
+        let exp = expectation(description: "Wait for save completion")
+        
+        sut.save(items: items) { error in
+            
+            receivedError = error
+            exp.fulfill()
+        }
+        
+        store.completeDeletion(with: deletionError)
+        wait(for: [exp], timeout: 1.0)
+        
+        XCTAssertEqual(receivedError as NSError?, deletionError)
     }
     
     //Marker: Helpers

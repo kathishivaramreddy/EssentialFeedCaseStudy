@@ -82,38 +82,86 @@
             endingLineNumber = "159"
             landmarkName = "expect(sut:withCaptured:action:file:line:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "72499B5E-489E-477C-8454-364701D1BF20"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CacheFeedUseCaseTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "test_save_failsOnDeletionError()"
+            landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "AEF69491-8E27-41D1-AD5C-D0C4B335D349 - 7cec79318c4bd44a"
+                  uuid = "72499B5E-489E-477C-8454-364701D1BF20 - fd6496606ae9975f"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "EssentialFeedTests.RemoteFeedLoaderTests.(expect in _DCF70F0D28C5552A92158E57BEADD52D)(sut: EssentialFeed.RemoteFeedLoader, withCaptured: EssentialFeed.LoadFeedResult, action: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
+                  symbolName = "EssentialFeedTests.CacheFeedUseCaseTests.test_save_failsOnDeletionError() -&gt; ()"
                   moduleName = "EssentialFeedTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeedTests/Feed%20API/RemoteFeedLoaderTests.swift"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeedTests/Feed%20Cache/CacheFeedUseCaseTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "167"
-                  endingLineNumber = "167"
-                  offsetFromSymbolStart = "518">
+                  startingLineNumber = "131"
+                  endingLineNumber = "131"
+                  offsetFromSymbolStart = "945">
                </Location>
                <Location
-                  uuid = "AEF69491-8E27-41D1-AD5C-D0C4B335D349 - 48056a1647ecc7ac"
+                  uuid = "72499B5E-489E-477C-8454-364701D1BF20 - 8430faa8b973cc6a"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (EssentialFeed.LoadFeedResult) -&gt; () in EssentialFeedTests.RemoteFeedLoaderTests.(expect in _DCF70F0D28C5552A92158E57BEADD52D)(sut: EssentialFeed.RemoteFeedLoader, withCaptured: EssentialFeed.LoadFeedResult, action: () -&gt; (), file: Swift.StaticString, line: Swift.UInt) -&gt; ()"
+                  symbolName = "closure #1 (Swift.Optional&lt;Swift.Error&gt;) -&gt; () in EssentialFeedTests.CacheFeedUseCaseTests.test_save_failsOnDeletionError() -&gt; ()"
                   moduleName = "EssentialFeedTests"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeedTests/Feed%20API/RemoteFeedLoaderTests.swift"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeedTests/Feed%20Cache/CacheFeedUseCaseTests.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "169"
-                  endingLineNumber = "169"
-                  offsetFromSymbolStart = "490">
+                  startingLineNumber = "127"
+                  endingLineNumber = "127"
+                  offsetFromSymbolStart = "115">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3047B326-9C93-4947-83DC-A69F3F674428"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CacheFeedUseCaseTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
+            landmarkName = "deleteCacheFeed(completion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33A8DCBF-FD72-440D-9D78-ECD4A13833E3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeedTests/Feed Cache/CacheFeedUseCaseTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
+            landmarkName = "test_save_failsOnDeletionError()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
