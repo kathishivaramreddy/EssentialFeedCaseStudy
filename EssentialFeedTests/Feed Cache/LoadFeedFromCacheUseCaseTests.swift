@@ -123,12 +123,26 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
         sut.load { _ in }
         
-        let lessThanSevenDays = currentDate.adding(days: -7).adding(seconds: -1)
+        let lessThanSevenDays = currentDate.adding(days: -7).adding(seconds: 1)
         
         store.completeRetrievalWith(localFeed: uniqueItems().localItems, timeStamp: lessThanSevenDays)
         
         XCTAssertEqual(store.receivedMessage, [.retrieve])
     }
+    
+        func test_load_deleteSevenDaysOldCache() {
+    
+            let currentDate = Date()
+            let (sut, store) = makeSUT(currentDate: { currentDate })
+    
+            sut.load { _ in }
+    
+            let sevenDays = currentDate.adding(days: -7)
+    
+            store.completeRetrievalWith(localFeed: uniqueItems().localItems, timeStamp: sevenDays)
+    
+            XCTAssertEqual(store.receivedMessage, [.retrieve, .deletion])
+        }
     
     //Marker: Helpers
     
