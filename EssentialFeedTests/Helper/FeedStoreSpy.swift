@@ -70,4 +70,9 @@ class FeedStoreSpy: FeedStore {
         
         retrievalCompletion[index](nil)
     }
+    
+    func completeRetrievalWithEmptyCache(at index: Int = 0) {
+        
+        retrievalCompletion[index](nil)
+    }
 }
