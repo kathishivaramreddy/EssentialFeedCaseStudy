@@ -10,11 +10,17 @@ import XCTest
 
 import EssentialFeed
 
-class FeedStore {
+protocol FeedStore {
     
     typealias DeletionCompletion = (Error?) -> Void
     typealias InsertionCompletion = (Error?) -> Void
-        
+    
+    func deleteCacheFeed(completion: @escaping DeletionCompletion)
+    func insert(items: [FeedItem], currentDate: Date, completion: @escaping InsertionCompletion)
+}
+
+class FeedStoreSpy: FeedStore {
+            
     private var deletionCompletions = [DeletionCompletion]()
     private var insertionCompletion = [InsertionCompletion]()
     
@@ -26,7 +32,7 @@ class FeedStore {
     
     var receivedMessage = [ReceivedMessage]()
     
-    func deleteCacheFeed(completion: @escaping (Error?) -> Void) {
+    func deleteCacheFeed(completion: @escaping DeletionCompletion) {
         
         deletionCompletions.append(completion)
         receivedMessage.append(.deletion)
@@ -47,7 +53,7 @@ class FeedStore {
         insertionCompletion[index](error)
     }
     
-    func insert(items: [FeedItem], currentDate: Date, completion: @escaping (Error?) -> Void) {
+    func insert(items: [FeedItem], currentDate: Date, completion: @escaping InsertionCompletion) {
         
         insertionCompletion.append(completion)
         receivedMessage.append(.insertion(items: items, date: currentDate))
@@ -173,9 +179,9 @@ class CacheFeedUseCaseTests: XCTestCase {
     
     //Marker: Helpers
     
-    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStore) {
+    private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStoreSpy) {
         
-        let store = FeedStore()
+        let store = FeedStoreSpy()
         let sut = LocalFeedLoader(store: store, items: [uniqueItem()], currentDate: currentDate)
         
         trackMemoryLeak(sut, file: file, line: line)
