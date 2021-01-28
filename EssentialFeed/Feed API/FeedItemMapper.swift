@@ -9,6 +9,11 @@ import Foundation
 
 struct FeedItemMapper {
     
+    private struct Root: Decodable {
+        
+        let items: [RemoteFeedItem]
+    }
+    
     private static var OK_200 = 200
     
     static func map(_ data: Data, _ response: HTTPURLResponse) throws -> [RemoteFeedItem] {
@@ -22,17 +27,4 @@ struct FeedItemMapper {
         
         return root.items
     }
-}
-
-struct Root: Decodable {
-    
-    let items: [RemoteFeedItem]
-}
-
-struct RemoteFeedItem: Decodable {
-    
-    let id: UUID
-    let description: String?
-    let location: String?
-    let image: URL
 }
