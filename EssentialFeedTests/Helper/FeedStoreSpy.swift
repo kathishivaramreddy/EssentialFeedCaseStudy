@@ -17,6 +17,7 @@ class FeedStoreSpy: FeedStore {
         
         case deletion
         case insertion(items: [LocalFeedImage], date: Date)
+        case retrieve
     }
     
     var receivedMessage = [ReceivedMessage]()
@@ -51,5 +52,10 @@ class FeedStoreSpy: FeedStore {
     func completeInsertionSuccessfully(at index: Int = 0) {
         
         insertionCompletion[index](nil)
+    }
+    
+    func retrieve() {
+        
+        receivedMessage.append(.retrieve)
     }
 }
