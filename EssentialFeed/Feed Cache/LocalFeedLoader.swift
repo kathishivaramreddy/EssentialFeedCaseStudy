@@ -47,9 +47,9 @@ public final class LocalFeedLoader {
         }
     }
     
-    public func load() {
+    public func load(with completion: @escaping (SaveResult) -> ()) {
         
-        store.retrieve()
+        store.retrieve(completion: completion)
     }
 }
 
