@@ -49,7 +49,7 @@ public final class LocalFeedLoader {
     }
     
     public func load(with completion: @escaping (LoadResult) -> ()) {
-
+        
         store.retrieve { [weak self] result in
             
             guard let self = self else { return }
@@ -59,9 +59,7 @@ public final class LocalFeedLoader {
                     completion(.failure(error))
                 case let .found(feedImage: localFeedImage, timeStamp: timeStamp) where self.validate(timeStamp):
                     completion(.success(localFeedImage.toModels()))
-                case .found:
-                    completion(.success([]))
-                case .empty:
+                case .found, .empty:
                     completion(.success([]))
             }
         }
