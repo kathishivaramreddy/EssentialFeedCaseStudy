@@ -89,7 +89,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_doesNotDeliverDeletionErrorWhenSUTIsDeallocated() {
         
         let store = FeedStoreSpy()
-        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, items: [uniqueItem()], currentDate: Date.init)
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
         
         var receivedResult = [LocalFeedLoader.SaveResult]()
         
@@ -104,7 +104,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     func test_save_doesNotDeliverInsertionErrorWhenSUTIsDeallocated() {
         
         let store = FeedStoreSpy()
-        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, items: [uniqueItem()], currentDate: Date.init)
+        var sut: LocalFeedLoader? = LocalFeedLoader(store: store, currentDate: Date.init)
         
         var receivedResult = [LocalFeedLoader.SaveResult]()
         
@@ -122,7 +122,7 @@ class CacheFeedUseCaseTests: XCTestCase {
     private func makeSUT(currentDate: @escaping () -> Date = Date.init, file: StaticString = #filePath, line: UInt = #line) -> (sut: LocalFeedLoader, store: FeedStoreSpy) {
         
         let store = FeedStoreSpy()
-        let sut = LocalFeedLoader(store: store, items: uniqueItems().models, currentDate: currentDate)
+        let sut = LocalFeedLoader(store: store, currentDate: currentDate)
         
         trackMemoryLeak(sut, file: file, line: line)
         trackMemoryLeak(store, file: file, line: line)

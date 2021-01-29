@@ -84,53 +84,5 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "8D50B296-7061-48C3-8334-F38E0A2C912C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "EssentialFeed/Feed Cache/LocalFeedLoader.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
-            landmarkName = "load(with:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "8D50B296-7061-48C3-8334-F38E0A2C912C - a85912369283ece4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (EssentialFeed.RetrievedFeedCacheResult) -&gt; () in EssentialFeed.LocalFeedLoader.load(with: (EssentialFeed.LoadFeedResult) -&gt; ()) -&gt; ()"
-                  moduleName = "EssentialFeed"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeed/Feed%20Cache/LocalFeedLoader.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1083">
-               </Location>
-               <Location
-                  uuid = "8D50B296-7061-48C3-8334-F38E0A2C912C - a85912369283ece4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (EssentialFeed.RetrievedFeedCacheResult) -&gt; () in EssentialFeed.LocalFeedLoader.load(with: (EssentialFeed.LoadFeedResult) -&gt; ()) -&gt; ()"
-                  moduleName = "EssentialFeed"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeed/Feed%20Cache/LocalFeedLoader.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "62"
-                  endingLineNumber = "62"
-                  offsetFromSymbolStart = "1162">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

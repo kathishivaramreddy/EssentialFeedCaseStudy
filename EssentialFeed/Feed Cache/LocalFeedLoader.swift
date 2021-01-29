@@ -10,7 +10,6 @@ import Foundation
 public final class LocalFeedLoader {
     
     private let store: FeedStore
-    private let items: [FeedImage]
     private let currentDate: () -> Date
     
     private let calendar = Calendar(identifier: .gregorian)
@@ -18,10 +17,9 @@ public final class LocalFeedLoader {
     public typealias SaveResult = Error?
     public typealias LoadResult = LoadFeedResult
     
-    public init(store: FeedStore, items: [FeedImage], currentDate: @escaping () -> Date) {
+    public init(store: FeedStore, currentDate: @escaping () -> Date) {
         
         self.store = store
-        self.items = items
         self.currentDate = currentDate
     }
     
