@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class LocalFeedLoader {
+public final class LocalFeedLoader: FeedLoader {
     
     private let store: FeedStore
     private let currentDate: () -> Date
@@ -65,7 +65,7 @@ extension LocalFeedLoader {
 
 extension LocalFeedLoader {
     
-    public func load(with completion: @escaping (LoadResult) -> ()) {
+    public func load(completion: @escaping (LoadResult) -> ()) {
         
         store.retrieve { [weak self] result in
             
