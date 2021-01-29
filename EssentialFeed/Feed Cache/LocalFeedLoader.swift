@@ -60,7 +60,6 @@ public final class LocalFeedLoader {
                 case let .found(feedImage: localFeedImage, timeStamp: timeStamp) where self.validate(timeStamp):
                     completion(.success(localFeedImage.toModels()))
                 case .found:
-                    self.store.deleteCacheFeed { _ in }
                     completion(.success([]))
                 case .empty:
                     completion(.success([]))
@@ -75,6 +74,8 @@ public final class LocalFeedLoader {
             switch result {
                 
                 case .failure:
+                    self.store.deleteCacheFeed { _ in }
+                case let .found(feedImage: _, timeStamp: timeStamp) where !self.validate(timeStamp):
                     self.store.deleteCacheFeed { _ in }
                 default:
                     break
