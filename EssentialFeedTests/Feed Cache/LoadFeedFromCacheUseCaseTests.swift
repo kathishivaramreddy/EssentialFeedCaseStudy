@@ -105,7 +105,7 @@ class LoadFeedFromCacheUseCaseTests: XCTestCase {
         
     }
     
-    func test_load_doesNotDeleteCacheOnEmptyCache() {
+    func test_load_doesNotHaveSideEffectOnOnEmptyCache() {
         
         let (sut, store) = makeSUT()
         
