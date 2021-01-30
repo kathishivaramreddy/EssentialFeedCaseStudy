@@ -160,6 +160,21 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut: sut, toRetreive: .failure(anyNSError()))
     }
     
+    func test_insert_overridesPreviouslyInsertedValues() {
+        
+        let sut = makeSUT()
+        
+        let insertionError = insert(sut: sut, feed: uniqueItems().localItems, timeStamp: Date())
+        XCTAssertNil(insertionError)
+        
+        let latestItems = uniqueItems().localItems
+        let latestDate = Date()
+        let latestInsertionError = insert(sut: sut, feed:latestItems, timeStamp: latestDate)
+        XCTAssertNil(latestInsertionError)
+        
+        expect(sut: sut, toRetreive: .found(feedImage: latestItems, timeStamp: latestDate))
+    }
+    
     //Mark: Helpers
     
     private func makeSUT(storeUrl: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableFeedStore {
@@ -169,17 +184,19 @@ class CodableFeedStoreTests: XCTestCase {
         return sut
     }
     
-    private func insert(sut: CodableFeedStore, feed: [LocalFeedImage], timeStamp: Date) {
+    @discardableResult
+    private func insert(sut: CodableFeedStore, feed: [LocalFeedImage], timeStamp: Date) -> Error? {
         
         let exp = expectation(description: "Wait for retreive")
-        
+        var receivedError: Error?
         sut.insert(items: feed, currentDate: timeStamp) { insertionError in
             
-            XCTAssertNil(insertionError)
+            receivedError = insertionError
             exp.fulfill()
         }
         
         wait(for: [exp], timeout: 1.0)
+        return receivedError
     }
     
     private func expect(sut: CodableFeedStore, toRetreive expectedResult: RetrievedFeedCacheResult) {
