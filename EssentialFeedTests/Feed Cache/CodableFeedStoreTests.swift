@@ -203,15 +203,8 @@ class CodableFeedStoreTests: XCTestCase {
         
         let sut = makeSUT()
         
-        let exp = expectation(description: "Waiting for delete expectation to complete")
-        sut.deleteCacheFeed { deletionError in
-            
-            XCTAssertNil(deletionError)
-            exp.fulfill()
+        XCTAssertNil(delete(sut: sut))
         }
-        
-        wait(for: [exp], timeout: 1.0)
-    }
     
     func test_delete_deletesPreviouslyInsertedCache() {
         
@@ -220,15 +213,7 @@ class CodableFeedStoreTests: XCTestCase {
         let insertionError = insert(sut: sut, feed: uniqueItems().localItems, timeStamp: Date())
         XCTAssertNil(insertionError)
         
-        
-        let exp = expectation(description: "Waiting for delete expectation to complete")
-        sut.deleteCacheFeed { deletionError in
-            
-            XCTAssertNil(deletionError)
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        XCTAssertNil(delete(sut: sut))
         
         expect(sut: sut, toRetreive: .empty)
     }
@@ -250,6 +235,22 @@ class CodableFeedStoreTests: XCTestCase {
         sut.insert(items: feed, currentDate: timeStamp) { insertionError in
             
             receivedError = insertionError
+            exp.fulfill()
+        }
+        
+        wait(for: [exp], timeout: 1.0)
+        return receivedError
+    }
+    
+    @discardableResult
+    private func delete(sut: CodableFeedStore) -> Error?{
+        
+        let exp = expectation(description: "Waiting for delete expectation to complete")
+        
+        var receivedError: Error?
+        sut.deleteCacheFeed { deletionError in
+            
+            receivedError = deletionError
             exp.fulfill()
         }
         
