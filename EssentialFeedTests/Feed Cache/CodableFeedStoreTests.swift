@@ -101,26 +101,9 @@ class CodableFeedStoreTests: XCTestCase {
     func test_retreive_doesNotHaveSideEffectOnEmptyCache() {
         
         let sut = makeSUT()
-        
-        let exp = expectation(description: "Wait for retreive")
-        
-        sut.retrieve { firstResult in
-            
-            sut.retrieve { secondresult in
                 
-                switch (firstResult, secondresult) {
-                    
-                    case (.empty, .empty):
-                        break
-                    default:
-                        XCTFail("Expect empty result twice on retreiving twice but got \(firstResult) \(secondresult)")
-                }
-            }
-            
-            exp.fulfill()
-        }
-        
-        wait(for: [exp], timeout: 1.0)
+        expect(sut: sut, toRetreive: .empty)
+        expect(sut: sut, toRetreive: .empty)
     }
     
     func test_retreiveAfterInsertion_returnsItemsCacheInserted() {
@@ -156,29 +139,14 @@ class CodableFeedStoreTests: XCTestCase {
         sut.insert(items: items, currentDate: timeStamp) { insertionError in
             
             XCTAssertNil(insertionError)
-            
-            
-            
-            sut.retrieve { firstResult in
-                
-                sut.retrieve { secondResult in
-                    switch (firstResult, secondResult) {
-                        
-                        case let (.found(firstFeedItems, firstTime), .found(secondFeedItems, secondTime)):
-                            XCTAssertEqual(firstFeedItems, items)
-                            XCTAssertEqual(firstTime, timeStamp)
-                            XCTAssertEqual(secondFeedItems, items)
-                            XCTAssertEqual(secondTime, timeStamp)
-                        default:
-                            XCTFail("Expected same value to be retreived but \(firstResult) \(firstResult)")
-                    }
-                }
-            }
-            
             exp.fulfill()
         }
         
         wait(for: [exp], timeout: 1.0)
+        
+        expect(sut: sut, toRetreive: .found(feedImage: items, timeStamp: timeStamp))
+        expect(sut: sut, toRetreive: .found(feedImage: items, timeStamp: timeStamp))
+
     }
     
     //Mark: Helpers
