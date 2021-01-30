@@ -11,7 +11,6 @@ public final class LocalFeedLoader: FeedLoader {
     
     private let store: FeedStore
     private let currentDate: () -> Date
-    private let cachePolicy = FeedCachePolicy()
             
     public init(store: FeedStore, currentDate: @escaping () -> Date) {
         
@@ -63,7 +62,7 @@ extension LocalFeedLoader {
                 
                 case let .failure(error):
                     completion(.failure(error))
-                case let .found(feedImage: localFeedImage, timeStamp: timeStamp) where self.cachePolicy.validate(timeStamp, against: self.currentDate()):
+                case let .found(feedImage: localFeedImage, timeStamp: timeStamp) where FeedCachePolicy.validate(timeStamp, against: self.currentDate()):
                     completion(.success(localFeedImage.toModels()))
                 case .found, .empty:
                     completion(.success([]))
@@ -83,7 +82,7 @@ extension LocalFeedLoader {
                 
                 case .failure:
                     self.store.deleteCacheFeed { _ in }
-                case let .found(feedImage: _, timeStamp: timeStamp) where !self.cachePolicy.validate(timeStamp, against: self.currentDate()):
+                case let .found(feedImage: _, timeStamp: timeStamp) where !FeedCachePolicy.validate(timeStamp, against: self.currentDate()):
                     self.store.deleteCacheFeed { _ in }
                 default:
                     break
