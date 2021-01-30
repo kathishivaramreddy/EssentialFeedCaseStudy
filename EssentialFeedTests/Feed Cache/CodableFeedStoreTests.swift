@@ -87,13 +87,17 @@ class CodableFeedStore {
     
     func deleteCacheFeed(completion: @escaping FeedStore.DeletionCompletion) {
         
-        guard let _ = try? Data(contentsOf: storeUrl) else {
-            
+        guard FileManager.default.fileExists(atPath: storeUrl.path) else {
             return completion(nil)
         }
         
-        try! FileManager.default.removeItem(at: storeUrl)
-        completion(nil)
+        do {
+            
+            try FileManager.default.removeItem(at: storeUrl)
+            completion(nil)
+        } catch {
+            completion(error)
+        }
     }
 }
 
@@ -218,6 +222,14 @@ class CodableFeedStoreTests: XCTestCase {
         expect(sut: sut, toRetreive: .empty)
     }
     
+    func test_delete_deliversDeletionErrorOnNoPermission() {
+        
+        let noDeletionPermissionStoreUrl = cachesDirectory()
+        let sut = makeSUT(storeUrl: noDeletionPermissionStoreUrl)
+        
+        XCTAssertNotNil(delete(sut: sut))
+        }
+    
     //Mark: Helpers
     
     private func makeSUT(storeUrl: URL? = nil, file: StaticString = #filePath, line: UInt = #line) -> CodableFeedStore {
@@ -283,7 +295,7 @@ class CodableFeedStoreTests: XCTestCase {
     
     private func testSpecificStoreURL() -> URL {
         
-        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!.appendingPathComponent("\(type(of: self)).store")
+        return cachesDirectory().appendingPathComponent("\(type(of: self)).store")
     }
     
     private func setupStoreBeforeTesting() {
@@ -297,5 +309,10 @@ class CodableFeedStoreTests: XCTestCase {
     
     private func undoStoreChangeAfterTest() {
         deleteStoreArtifacts()
+    }
+    
+    private func cachesDirectory() -> URL {
+        
+        return FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
     }
 }
