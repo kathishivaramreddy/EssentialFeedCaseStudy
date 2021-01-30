@@ -148,6 +148,37 @@ class CodableFeedStoreTests: XCTestCase {
         return sut
     }
     
+    func test_sideEffects_runSerially() {
+        
+        let sut = makeSUT()
+        
+        var operations = [XCTestExpectation]()
+        let operation1 = expectation(description: "Insertion Operation")
+        sut.insert(items: uniqueItems().localItems, currentDate: Date()) { _ in
+            
+            operations.append(operation1)
+            operation1.fulfill()
+        }
+        
+        let operation2 = expectation(description: "Deletion Operation")
+        
+        sut.deleteCacheFeed { _ in
+            
+            operations.append(operation2)
+            operation2.fulfill()
+        }
+        
+        let operation3 = expectation(description: "Insertion Operation")
+        sut.insert(items: uniqueItems().localItems, currentDate: Date()) { _ in
+            
+            operations.append(operation3)
+            operation3.fulfill()
+        }
+        
+        wait(for: [operation1,operation2,operation3], timeout: 5.0)
+        XCTAssertEqual([operation1, operation2,operation3], operations,"Expectation side effects to run serially")
+    }
+    
     @discardableResult
     private func insert(sut: FeedStore, feed: [LocalFeedImage], timeStamp: Date) -> Error? {
         
