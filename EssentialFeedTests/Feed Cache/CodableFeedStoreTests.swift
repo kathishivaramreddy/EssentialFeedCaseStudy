@@ -81,6 +81,21 @@ class CodableFeedStoreTests: XCTestCase {
         
         super.setUp()
         
+        setupStoreBeforeTesting()
+    }
+    
+    private func setupStoreBeforeTesting() {
+        try? FileManager.default.removeItem(at: testSpecificStoreURL())
+    }
+    
+    override func tearDown() {
+        
+        super.tearDown()
+        
+        undoStoreChangeAfterTest()
+    }
+    
+    private func undoStoreChangeAfterTest() {
         try? FileManager.default.removeItem(at: testSpecificStoreURL())
     }
     
