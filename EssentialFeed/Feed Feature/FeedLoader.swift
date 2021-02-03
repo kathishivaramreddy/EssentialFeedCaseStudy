@@ -5,11 +5,7 @@
 //  Created by ShivaRamReddy on 21/01/21.
 //
 
-public enum LoadFeedResult {
-    
-    case success([FeedImage])
-    case failure(Error)
-}
+public typealias LoadFeedResult = Result<[FeedImage], Error>
 
 public protocol FeedLoader {
         
