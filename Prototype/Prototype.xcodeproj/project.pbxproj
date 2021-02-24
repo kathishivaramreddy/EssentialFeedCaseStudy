@@ -14,6 +14,7 @@
 		F7AD21E025E592DD00EC2331 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7AD21DE25E592DD00EC2331 /* LaunchScreen.storyboard */; };
 		F7AD21EB25E592DE00EC2331 /* PrototypeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AD21EA25E592DE00EC2331 /* PrototypeTests.swift */; };
 		F7AD21F625E592DE00EC2331 /* PrototypeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AD21F525E592DE00EC2331 /* PrototypeUITests.swift */; };
+		F7AD225C25E6E79300EC2331 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AD225B25E6E79300EC2331 /* FeedViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		F7AD21F125E592DE00EC2331 /* PrototypeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PrototypeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7AD21F525E592DE00EC2331 /* PrototypeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrototypeUITests.swift; sourceTree = "<group>"; };
 		F7AD21F725E592DE00EC2331 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F7AD225B25E6E79300EC2331 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				F7AD21D325E592D900EC2331 /* AppDelegate.swift */,
 				F7AD21D525E592D900EC2331 /* SceneDelegate.swift */,
 				F7AD21D925E592D900EC2331 /* Main.storyboard */,
+				F7AD225B25E6E79300EC2331 /* FeedViewController.swift */,
 				F7AD21DC25E592DD00EC2331 /* Assets.xcassets */,
 				F7AD21DE25E592DD00EC2331 /* LaunchScreen.storyboard */,
 				F7AD21E125E592DD00EC2331 /* Info.plist */,
@@ -256,6 +259,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F7AD21D425E592D900EC2331 /* AppDelegate.swift in Sources */,
+				F7AD225C25E6E79300EC2331 /* FeedViewController.swift in Sources */,
 				F7AD21D625E592D900EC2331 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
