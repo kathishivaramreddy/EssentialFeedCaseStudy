@@ -84,5 +84,101 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6349500B-F860-4E91-A490-E86FBBD0B56A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOSTests/FeedViewControllerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
+            landmarkName = "test_pullToReferesh_loadsFeed()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "6349500B-F860-4E91-A490-E86FBBD0B56A - 42f4e359237cf058"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "EssentialFeediOSTests.FeedViewControllerTests.test_pullToReferesh_loadsFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "62"
+                  endingLineNumber = "62"
+                  offsetFromSymbolStart = "174">
+               </Location>
+               <Location
+                  uuid = "6349500B-F860-4E91-A490-E86FBBD0B56A - 1db4cf6cb45b8f4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.AnyHashable) -&gt; () in EssentialFeediOSTests.FeedViewControllerTests.test_pullToReferesh_loadsFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "43">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "33CC9760-1D5A-4D0E-8B1E-BA53D19215BF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "EssentialFeediOSTests/FeedViewControllerTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "test_pullToReferesh_loadsFeed()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "33CC9760-1D5A-4D0E-8B1E-BA53D19215BF - 1db4cf6cb45b8f4d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.AnyHashable) -&gt; () in EssentialFeediOSTests.FeedViewControllerTests.test_pullToReferesh_loadsFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "43">
+               </Location>
+               <Location
+                  uuid = "33CC9760-1D5A-4D0E-8B1E-BA53D19215BF - 6549b564e6357b74"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.String) -&gt; () in closure #1 (Swift.AnyHashable) -&gt; () in EssentialFeediOSTests.FeedViewControllerTests.test_pullToReferesh_loadsFeed() -&gt; ()"
+                  moduleName = "EssentialFeediOSTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/omniadmin/Desktop/KSREnterprise/EssentialFeed/EssentialFeediOSTests/FeedViewControllerTests.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "66"
+                  endingLineNumber = "66"
+                  offsetFromSymbolStart = "48">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

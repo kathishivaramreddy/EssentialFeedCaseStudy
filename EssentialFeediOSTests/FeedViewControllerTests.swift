@@ -9,7 +9,7 @@ import Foundation
 import XCTest
 import EssentialFeed
 
-class FeedViewController: UIViewController {
+class FeedViewController: UITableViewController {
     
     private var loader: FeedLoader?
     convenience init(loader: FeedLoader) {
@@ -21,6 +21,15 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        refreshControl = UIRefreshControl()
+        
+        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
+        
+        load()
+    }
+    
+    @objc func load() {
         
         loader?.load{ _ in }
     }
@@ -42,6 +51,23 @@ class FeedViewControllerTests: XCTestCase {
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(loader.loadedCellCount, 1)
+    }
+    
+    func test_pullToReferesh_loadsFeed() {
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        sut.refreshControl?.allTargets.forEach({ (target) in
+            
+            sut.refreshControl?.actions(forTarget: target, forControlEvent: .valueChanged)?.forEach({
+                
+                (target as NSObject).perform(Selector($0))
+            })
+        })
+        
+        XCTAssertEqual(loader.loadedCellCount, 2)
     }
     
     class LoaderSpy: FeedLoader {
