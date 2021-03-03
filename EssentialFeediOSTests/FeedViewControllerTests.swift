@@ -8,35 +8,7 @@
 import Foundation
 import XCTest
 import EssentialFeed
-
-class FeedViewController: UITableViewController {
-    
-    private var loader: FeedLoader?
-    convenience init(loader: FeedLoader) {
-        
-        self.init()
-        self.loader = loader
-    }
-    
-    override func viewDidLoad() {
-        
-        super.viewDidLoad()
-        
-        refreshControl = UIRefreshControl()
-        
-        refreshControl?.addTarget(self, action: #selector(load), for: .valueChanged)
-        refreshControl?.beginRefreshing()
-        load()
-    }
-    
-    @objc func load() {
-        
-        loader?.load{ [weak self] _ in
-            
-            self?.refreshControl?.endRefreshing()
-        }
-    }
-}
+import EssentialFeediOS
 
 class FeedViewControllerTests: XCTestCase {
  
@@ -59,45 +31,22 @@ class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedCellCount, 3)
     }
     
-    func test_viewDidLoad_showsLoadingIndicator() {
-        
-        let (sut, _) = makeSUT()
-        
-        sut.loadViewIfNeeded()
-        
-        XCTAssertEqual(sut.isShowLoadingIndicator, true)
-    }
-    
-    func test_loadIndicator_isHiddenWhenFeedIsLoaded() {
+    func test_loadFeedActions_showsLoadingIndicator() {
         
         let (sut, loader) = makeSUT()
         
         sut.loadViewIfNeeded()
         
         XCTAssertEqual(sut.isShowLoadingIndicator, true)
-        
+    
         loader.successfullyCompletedLodinngFeed()
         
         XCTAssertEqual(sut.isShowLoadingIndicator, false)
-    }
-    
-    func test_userIntiatedFeedReload_showsLoadingIndicator() {
-        
-        let (sut, _) = makeSUT()
         
         sut.simulateUserIntiatedReload()
 
         XCTAssertEqual(sut.isShowLoadingIndicator, true)
-    }
-    
-    func test_loadIndicator_isHiddenWhenuserIntiatedFeedReloadisLoaded() {
-        
-        let (sut, loader) = makeSUT()
-        
-        sut.simulateUserIntiatedReload()
-        
-        XCTAssertEqual(sut.isShowLoadingIndicator, true)
-        
+   
         loader.successfullyCompletedLodinngFeed()
         
         XCTAssertEqual(sut.isShowLoadingIndicator, false)
