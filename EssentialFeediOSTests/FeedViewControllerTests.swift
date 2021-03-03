@@ -7,11 +7,12 @@
 
 import Foundation
 import XCTest
+import EssentialFeed
 
 class FeedViewController: UIViewController {
     
-    private var loader: FeedViewControllerTests.LoaderSpy?
-    convenience init(loader: FeedViewControllerTests.LoaderSpy) {
+    private var loader: FeedLoader?
+    convenience init(loader: FeedLoader) {
         
         self.init()
         self.loader = loader
@@ -21,7 +22,7 @@ class FeedViewController: UIViewController {
         
         super.viewDidLoad()
         
-        loader?.loadFeed()
+        loader?.load{ _ in }
     }
 }
 
@@ -45,13 +46,13 @@ class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(loader.loadedCellCount, 1)
     }
     
-    class LoaderSpy {
+    class LoaderSpy: FeedLoader {
         
         private(set) var loadedCellCount = 0
         
-        func loadFeed() {
+        func load(completion: @escaping (LoadFeedResult) -> Void) {
             
-            loadedCellCount = 1
+            loadedCellCount += 1
         }
     }
 }
