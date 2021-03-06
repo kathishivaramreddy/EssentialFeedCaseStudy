@@ -34,9 +34,15 @@ public class FeedViewController: UITableViewController {
         refreshControl?.beginRefreshing()
         loader?.load{ [weak self] result in
             
-            self?.feedModel = (try? result.get()) ?? []
-            self?.tableView.reloadData()
-            self?.refreshControl?.endRefreshing()
+            switch result {
+                
+                case let .success(feed):
+                    self?.feedModel = feed
+                    self?.tableView.reloadData()
+                    self?.refreshControl?.endRefreshing()
+                case .failure:
+                    break
+            }
         }
     }
     

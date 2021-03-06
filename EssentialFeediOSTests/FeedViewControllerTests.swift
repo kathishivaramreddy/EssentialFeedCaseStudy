@@ -73,6 +73,25 @@ class FeedViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: [image0, image1, image2, image3])
     }
     
+    func test_feedLoadCompletion_doesNotAlterCurrentRenderState() {
+        
+        
+        let image0 = makeImage(description: "a description", location: "a location")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        assertThat(sut, isRendering: [])
+        
+        loader.successfullyCompletedLodinngFeed(with: [image0], at: 0)
+        assertThat(sut, isRendering: [image0])
+        
+        sut.simulateUserIntiatedReload()
+        loader.failedToCompleteLoadingFed(with: anyNSError(), at: 1)
+        assertThat(sut, isRendering: [image0])
+    }
+    
     
     class LoaderSpy: FeedLoader {
         
@@ -92,6 +111,10 @@ class FeedViewControllerTests: XCTestCase {
             
             completions[index](.success(feedImage))
         }
+        
+        func failedToCompleteLoadingFed(with error: NSError, at index: Int) {
+            completions[index](.failure(error))
+        }
     }
     
     //MARK: Helpers
@@ -105,6 +128,11 @@ class FeedViewControllerTests: XCTestCase {
         trackMemoryLeak(sut,file: file,line: line)
         
         return (sut, loader)
+    }
+    
+    private func anyNSError() -> NSError {
+        
+        NSError(domain: "any error", code: 0, userInfo: nil)
     }
     
     private func makeImage(description: String? = nil, location: String? = nil, url: URL = URL(string: "http://any-url.com")!) -> FeedImage {
