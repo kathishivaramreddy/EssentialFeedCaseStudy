@@ -18,15 +18,21 @@ final public class FeedUIComposer {
         let refereshController = FeedRefreshViewController(loader: loader)
         let feedViewController = FeedViewController(refreshViewController: refereshController)
         
-        refereshController.onRefresh = { [weak feedViewController] feed in
+        refereshController.onRefresh = adaptFeedModelToFeedImageCellController(forwardTo: feedViewController, with: imageLoader)
+        
+        
+        return feedViewController
+    }
+    
+    private static func adaptFeedModelToFeedImageCellController(forwardTo controller: FeedViewController, with imageLoader: FeedImageLoader)
+    -> ([FeedImage]) -> Void {
+        return { [weak controller] feed in
             
-            feedViewController?.feedModel = feed.map({ (feedImage) in
+            controller?.feedModel = feed.map({ (feedImage) in
                 
                 FeedImageCellController(imageLoader: imageLoader, cellModel: feedImage)
             })
         }
-        
-        return feedViewController
     }
 }
 

@@ -190,8 +190,8 @@
             filePath = "EssentialFeediOS/Controller/FeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -238,8 +238,8 @@
             filePath = "EssentialFeediOS/Controller/FeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
             landmarkName = "feedComposedWith(loader:imageLoader:)"
             landmarkType = "7">
          </BreakpointContent>
