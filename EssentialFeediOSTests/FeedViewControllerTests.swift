@@ -92,8 +92,29 @@ class FeedViewControllerTests: XCTestCase {
         assertThat(sut, isRendering: [image0])
     }
     
+    func test_feedImageView_loadsImageUrlWhenViewIsVisible() {
+        
+        let image0 = makeImage(description: "a description", location: "a location")
+        let image1 = makeImage(description: nil, location: "another location")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        loader.successfullyCompletedLodinngFeed(with: [image0, image1], at: 0)
+        
+        XCTAssertEqual(loader.loadedImageUrl.count, 0)
+        
+        sut.simulateFeedImageViewLoading(at: 0)
+        
+        XCTAssertEqual(loader.loadedImageUrl.count, 1)
+        
+        sut.simulateFeedImageViewLoading(at: 1)
+        
+        XCTAssertEqual(loader.loadedImageUrl.count, 2)
+    }
     
-    class LoaderSpy: FeedLoader {
+    class LoaderSpy: FeedLoader, FeedImageLoader {
         
         var loadedCellCount: Int   {
             
@@ -101,6 +122,8 @@ class FeedViewControllerTests: XCTestCase {
         }
         
         private(set) var completions = [(LoadFeedResult) -> Void]()
+        
+        
         
         func load(completion: @escaping (LoadFeedResult) -> Void) {
             
@@ -113,7 +136,16 @@ class FeedViewControllerTests: XCTestCase {
         }
         
         func failedToCompleteLoadingFed(with error: NSError, at index: Int) {
+            
             completions[index](.failure(error))
+        }
+        
+        //MARK:-  FEEDIMAGELOADER
+        private(set) var loadedImageUrl =  [URL]()
+        
+        func loadImage(with url: URL) {
+            
+            loadedImageUrl.append(url)
         }
     }
     
@@ -122,7 +154,7 @@ class FeedViewControllerTests: XCTestCase {
     private func makeSUT(file: StaticString = #filePath, line: UInt = #line) -> (sut: FeedViewController, loader: LoaderSpy) {
         
         let loader = LoaderSpy()
-        let sut = FeedViewController(loader: loader)
+        let sut = FeedViewController(loader: loader, imageLoader: loader)
         
         trackMemoryLeak(loader,file: file,line: line)
         trackMemoryLeak(sut,file: file,line: line)
@@ -206,6 +238,11 @@ private extension FeedViewController {
         let ds = tableView.dataSource
         let index = IndexPath(row: index, section: feedSection)
         return ds?.tableView(tableView, cellForRowAt: index)
+    }
+    
+    func simulateFeedImageViewLoading(at index: Int) {
+        
+        _ = feedImageView(at: index)
     }
 }
 

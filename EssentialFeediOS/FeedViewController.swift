@@ -9,14 +9,22 @@ import Foundation
 import UIKit
 import EssentialFeed
 
+public protocol FeedImageLoader {
+    
+    func loadImage(with url: URL)
+}
+
 public class FeedViewController: UITableViewController {
     
     private var loader: FeedLoader?
+    private var imageLoader: FeedImageLoader?
+    
     private var feedModel = [FeedImage]()
-    public convenience init(loader: FeedLoader) {
+    public convenience init(loader: FeedLoader, imageLoader: FeedImageLoader) {
         
         self.init()
         self.loader = loader
+        self.imageLoader = imageLoader
     }
     
     public override func viewDidLoad() {
@@ -60,6 +68,8 @@ public class FeedViewController: UITableViewController {
         cell.locationContainer.isHidden = (cellModel.location == nil)
         cell.descriptionLabel.text = cellModel.description
         cell.locationLabel.text = cellModel.location
+        
+        self.imageLoader?.loadImage(with: cellModel.imageURL)
         return cell
     }
 }
