@@ -151,8 +151,6 @@ class FeedViewControllerTests: XCTestCase {
             
         let view1 = sut.simulateFeedImageViewLoading(at: 1)
         
-        
-        
         XCTAssertEqual(view0.isShowingImageLoadingIndicator, true, "when image is not yet loaded")
         XCTAssertEqual(view1.isShowingImageLoadingIndicator, true, "when image is not yet loaded")
         
@@ -167,6 +165,37 @@ class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1.isShowingImageLoadingIndicator, false, "when image is loaded")
     }
     
+    func test_feedImageView_rendersLoadedImage() {
+        
+        let image0 = makeImage(description: "a description", location: "a location")
+        let image1 = makeImage(description: nil, location: "another location")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        loader.successfullyCompletedLodinngFeed(with: [image0, image1], at: 0)
+        
+        let view0 = sut.simulateFeedImageViewLoading(at: 0)
+        let view1 = sut.simulateFeedImageViewLoading(at: 1)
+        
+        XCTAssertEqual(view0.renderedImage, .none, "when image is not yet loaded")
+        XCTAssertEqual(view1.renderedImage, .none, "when image is not yet loaded")
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        loader.successfullyCompleteLoadingImage(at: 0, with: imageData0)
+        
+        XCTAssertEqual(view0.renderedImage, imageData0, "when image is loaded with correct data")
+        XCTAssertEqual(view1.renderedImage, .none, "when image is not yet loaded")
+        
+        let imageData1 = UIImage.make(withColor: .blue).pngData()!
+        loader.successfullyCompleteLoadingImage(at: 1, with: imageData1)
+        
+        XCTAssertEqual(view0.renderedImage, imageData0, "when image is loaded")
+        XCTAssertEqual(view1.renderedImage, imageData1, "when image is loaded")
+    }
+    
+    //MARK:- LOADERSPY
     class LoaderSpy: FeedLoader, FeedImageLoader {
         
         var loadedCellCount: Int   {
@@ -364,5 +393,23 @@ private extension FeedImageCell {
     
     var isShowingImageLoadingIndicator: Bool {
         return feedImageContainer.isShimmering
+    }
+    
+    var renderedImage: Data? {
+            return feedImageView.image?.pngData()
+        }
+}
+
+
+private extension UIImage {
+    static func make(withColor color: UIColor) -> UIImage {
+        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
+        UIGraphicsBeginImageContext(rect.size)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setFillColor(color.cgColor)
+        context.fill(rect)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return img!
     }
 }
