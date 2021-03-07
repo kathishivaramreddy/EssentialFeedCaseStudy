@@ -117,8 +117,17 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
             
             let cellModel = feedModel[indexPath.row]
             
-            _ = self.imageLoader?.loadImage(with: cellModel.imageURL, completion: { _ in
+            self.task[indexPath.row] = self.imageLoader?.loadImage(with: cellModel.imageURL, completion: { _ in
             })
+        }
+    }
+    
+    public func tableView(_ tableView: UITableView, cancelPrefetchingForRowsAt indexPaths: [IndexPath]) {
+        
+        indexPaths.forEach { (indexPath) in
+            
+            task[indexPath.row]?.cancel()
+            task[indexPath.row] = nil
         }
     }
     
