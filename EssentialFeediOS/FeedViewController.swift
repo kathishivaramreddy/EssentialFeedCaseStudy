@@ -83,9 +83,9 @@ public class FeedViewController: UITableViewController {
         cell.feedImageView.image = nil
         task[indexPath.row] = self.imageLoader?.loadImage(with: cellModel.imageURL) { [weak cell] result in
             
-            if let data = try? result.get() {
+            if let data = try? result.get(), let image = UIImage(data: data) {
                 
-                cell?.feedImageView.image = UIImage(data: data) ?? nil
+                cell?.feedImageView.image = image
             } else {
                 
                 cell?.feedRetryButton.isHidden = false
