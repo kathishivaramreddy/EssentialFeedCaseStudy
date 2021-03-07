@@ -167,13 +167,24 @@ class FeedViewControllerTests: XCTestCase {
         
         private(set) var cancelledloadedImageUrl = [URL]()
         
-        func loadImage(with url: URL) {
+        private struct TaskSpy: FeedImageTaskLoader {
             
-            loadedImageUrl.append(url)
+            var cancelCallBack: () -> Void
+            
+            func cancel() {
+                
+                cancelCallBack()
+            }
         }
         
-        func cancelLoad(with url: URL) {
-            cancelledloadedImageUrl.append(url)
+        func loadImage(with url: URL) -> FeedImageTaskLoader {
+            
+            loadedImageUrl.append(url)
+            
+            return TaskSpy { [weak self] in
+                
+                self?.cancelledloadedImageUrl.append(url)
+            }
         }
     }
     

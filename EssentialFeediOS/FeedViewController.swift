@@ -9,10 +9,14 @@ import Foundation
 import UIKit
 import EssentialFeed
 
+public protocol FeedImageTaskLoader {
+    
+    func cancel()
+}
+
 public protocol FeedImageLoader {
     
-    func loadImage(with url: URL)
-    func cancelLoad(with url: URL)
+    func loadImage(with url: URL) -> FeedImageTaskLoader
 }
 
 public class FeedViewController: UITableViewController {
@@ -21,6 +25,8 @@ public class FeedViewController: UITableViewController {
     private var imageLoader: FeedImageLoader?
     
     private var feedModel = [FeedImage]()
+    var task = [Int: FeedImageTaskLoader]()
+    
     public convenience init(loader: FeedLoader, imageLoader: FeedImageLoader) {
         
         self.init()
@@ -70,14 +76,13 @@ public class FeedViewController: UITableViewController {
         cell.descriptionLabel.text = cellModel.description
         cell.locationLabel.text = cellModel.location
         
-        self.imageLoader?.loadImage(with: cellModel.imageURL)
+        task[indexPath.row] = self.imageLoader?.loadImage(with: cellModel.imageURL)
         return cell
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        let cellModel = feedModel[indexPath.row]
-        
-        self.imageLoader?.cancelLoad(with: cellModel.imageURL)
+        task[indexPath.row]?.cancel()
+        task[indexPath.row] = nil
     }
 }
