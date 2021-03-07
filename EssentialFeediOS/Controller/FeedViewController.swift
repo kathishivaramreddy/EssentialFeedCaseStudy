@@ -9,19 +9,21 @@ import Foundation
 import UIKit
 import EssentialFeed
 
-
 public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
     
     private var imageLoader: FeedImageLoader?
     
     private var refereshController: FeedRefreshViewController?
+    
+    private var cellControllers = [IndexPath: FeedImageCellController]()
+    
     private var feedModel = [FeedImage]() {
+        
         didSet {
             
             self.tableView?.reloadData()
         }
     }
-    var task = [Int: FeedImageTaskLoader]()
     
     public convenience init(loader: FeedLoader, imageLoader: FeedImageLoader) {
         
@@ -56,55 +58,22 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
     }
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cellModel = feedModel[indexPath.row]
-        
-        let cell = FeedImageCell()
-        cell.locationContainer.isHidden = (cellModel.location == nil)
-        cell.descriptionLabel.text = cellModel.description
-        cell.locationLabel.text = cellModel.location
-        
-        cell.feedImageContainer.startShimmering()
-        cell.feedRetryButton.isHidden = true
-        cell.feedImageView.image = nil
-        
-        let loadImage = { [weak self, weak cell] in
-            
-            guard let self = self else { return }
-            
-            self.task[indexPath.row] = self.imageLoader?.loadImage(with: cellModel.imageURL) { [weak cell] result in
                 
-                if let data = try? result.get(), let image = UIImage(data: data) {
-                    
-                    cell?.feedImageView.image = image
-                } else {
-                    
-                    cell?.feedRetryButton.isHidden = false
-                }
-                cell?.feedImageContainer.stopShimmering()
-            }
-        }
-        cell.onRetry = loadImage
-        
-        loadImage()
-        
-        return cell
+        let cellController = createCellController(forRowAt: indexPath)
+        return cellController.view()
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         
-        task[indexPath.row]?.cancel()
-        task[indexPath.row] = nil
+        self.removeCellController(forIndexPath: indexPath)
     }
     
     public func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         
         indexPaths.forEach { (indexPath) in
-            
-            let cellModel = feedModel[indexPath.row]
-            
-            self.task[indexPath.row] = self.imageLoader?.loadImage(with: cellModel.imageURL, completion: { _ in
-            })
+                        
+            let cellController = createCellController(forRowAt: indexPath)
+            cellController.preLoad()
         }
     }
     
@@ -112,9 +81,19 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         
         indexPaths.forEach { (indexPath) in
             
-            task[indexPath.row]?.cancel()
-            task[indexPath.row] = nil
+            self.removeCellController(forIndexPath: indexPath)
         }
     }
     
+    private func removeCellController(forIndexPath indexPath: IndexPath) {
+        
+        self.cellControllers[indexPath] = nil
+    }
+    
+    private func createCellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+            let cellModel = feedModel[indexPath.row]
+            let cellController = FeedImageCellController(imageLoader: self.imageLoader!, cellModel: cellModel)
+            cellControllers[indexPath] = cellController
+            return cellController
+        }
 }
