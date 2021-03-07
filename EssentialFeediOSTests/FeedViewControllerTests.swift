@@ -195,6 +195,35 @@ class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view1.renderedImage, imageData1, "when image is loaded")
     }
     
+    func test_feedImageView_showRetryButtonOnImageDownLoadError() {
+        
+        let image0 = makeImage(description: "a description", location: "a location")
+        let image1 = makeImage(description: nil, location: "another location")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        loader.successfullyCompletedLodinngFeed(with: [image0, image1], at: 0)
+        
+        let view0 = sut.simulateFeedImageViewLoading(at: 0)
+        let view1 = sut.simulateFeedImageViewLoading(at: 1)
+        
+        XCTAssertEqual(view0.isShowingRetryAction, false, "when image is not yet loaded")
+        XCTAssertEqual(view1.isShowingRetryAction, false, "when image is not yet loaded")
+        
+        let imageData0 = UIImage.make(withColor: .red).pngData()!
+        loader.successfullyCompleteLoadingImage(at: 0, with: imageData0)
+        
+        XCTAssertEqual(view0.isShowingRetryAction, false, "when image is loaded with correct data")
+        XCTAssertEqual(view1.isShowingRetryAction, false, "when image is not yet loaded")
+        
+        loader.failedToCompleteLoadingImage(at: 1)
+        
+        XCTAssertEqual(view0.isShowingRetryAction, false, "when image is loaded")
+        XCTAssertEqual(view1.isShowingRetryAction, true, "when image is loaded")
+    }
+    
     //MARK:- LOADERSPY
     class LoaderSpy: FeedLoader, FeedImageLoader {
         
@@ -261,7 +290,7 @@ class FeedViewControllerTests: XCTestCase {
         
         func failedToCompleteLoadingImage(at index: Int) {
             
-            let error = NSError(domain: "erro", code: 100, userInfo: nil)
+            let error = NSError(domain: "error", code: 100, userInfo: nil)
             imageLoadingCompletion[index].completion(.failure(error))
         }
     }
@@ -397,7 +426,12 @@ private extension FeedImageCell {
     
     var renderedImage: Data? {
             return feedImageView.image?.pngData()
-        }
+    }
+    
+    var isShowingRetryAction: Bool {
+        
+        return !feedRetryButton.isHidden
+    }
 }
 
 
