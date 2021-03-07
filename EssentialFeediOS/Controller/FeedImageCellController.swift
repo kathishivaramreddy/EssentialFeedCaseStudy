@@ -62,7 +62,7 @@ final public class FeedImageCellController {
         })
     }
     
-    deinit {
+    func cancel() {
         
         self.task?.cancel()
     }

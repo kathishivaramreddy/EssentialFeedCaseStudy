@@ -9,15 +9,32 @@ import Foundation
 import UIKit
 import EssentialFeed
 
+final public class FeedUIComposer {
+    
+    private init() {}
+    
+    public static func feedComposedWith(loader: FeedLoader, imageLoader: FeedImageLoader) -> FeedViewController {
+        
+        let refereshController = FeedRefreshViewController(loader: loader)
+        let feedViewController = FeedViewController(refreshViewController: refereshController)
+        
+        refereshController.onRefresh = { [weak feedViewController] feed in
+            
+            feedViewController?.feedModel = feed.map({ (feedImage) in
+                
+                FeedImageCellController(imageLoader: imageLoader, cellModel: feedImage)
+            })
+        }
+        
+        return feedViewController
+    }
+}
+
 public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
-    
-    private var imageLoader: FeedImageLoader?
-    
-    private var refereshController: FeedRefreshViewController?
-    
-    private var cellControllers = [IndexPath: FeedImageCellController]()
-    
-    private var feedModel = [FeedImage]() {
+        
+    var refereshController: FeedRefreshViewController?
+        
+    var feedModel = [FeedImageCellController]() {
         
         didSet {
             
@@ -25,11 +42,10 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         }
     }
     
-    public convenience init(loader: FeedLoader, imageLoader: FeedImageLoader) {
+    convenience init(refreshViewController: FeedRefreshViewController) {
         
         self.init()
-        self.refereshController = FeedRefreshViewController(loader: loader)
-        self.imageLoader = imageLoader
+        self.refereshController = refreshViewController
     }
     
     public override func viewDidLoad() {
@@ -37,19 +53,9 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         super.viewDidLoad()
         
         refreshControl = refereshController?.refreshControl
+        refereshController?.load()
         
         tableView.prefetchDataSource = self
-        load()
-    }
-    
-    @objc func load() {
-        refreshControl?.beginRefreshing()
-        refereshController?.onRefresh = { [weak self] feed in
-            
-            self?.feedModel = feed
-        }
-        
-        refereshController?.load()
     }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -59,8 +65,7 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
-        let cellController = createCellController(forRowAt: indexPath)
-        return cellController.view()
+        return self.getCellController(forRowAt: indexPath).view()
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -72,8 +77,7 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         
         indexPaths.forEach { (indexPath) in
                         
-            let cellController = createCellController(forRowAt: indexPath)
-            cellController.preLoad()
+            self.getCellController(forRowAt: indexPath).preLoad()
         }
     }
     
@@ -87,13 +91,10 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
     
     private func removeCellController(forIndexPath indexPath: IndexPath) {
         
-        self.cellControllers[indexPath] = nil
+        self.getCellController(forRowAt: indexPath).cancel()
     }
     
-    private func createCellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
-            let cellModel = feedModel[indexPath.row]
-            let cellController = FeedImageCellController(imageLoader: self.imageLoader!, cellModel: cellModel)
-            cellControllers[indexPath] = cellController
-            return cellController
+    private func getCellController(forRowAt indexPath: IndexPath) -> FeedImageCellController {
+            return feedModel[indexPath.row]
         }
 }

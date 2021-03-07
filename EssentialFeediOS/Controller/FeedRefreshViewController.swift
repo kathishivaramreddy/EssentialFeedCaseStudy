@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import EssentialFeed
 
-final public class FeedRefreshViewController: NSObject {
+final class FeedRefreshViewController: NSObject {
     
     private var loader: FeedLoader?
     
