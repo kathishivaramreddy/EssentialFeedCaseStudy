@@ -245,6 +245,33 @@ class FeedViewControllerTests: XCTestCase {
         XCTAssertEqual(view0.isShowingRetryAction, true, "when image is invalid")
     }
     
+    func test_retryButton_triggersLoadImage() {
+        
+        let image0 = makeImage(description: "a description", location: "a location")
+        let image1 = makeImage(description: nil, location: "another location")
+        
+        let (sut, loader) = makeSUT()
+        
+        sut.loadViewIfNeeded()
+        
+        loader.successfullyCompletedLodinngFeed(with: [image0, image1], at: 0)
+        
+        let view0 = sut.simulateFeedImageViewLoading(at: 0)
+        let view1 = sut.simulateFeedImageViewLoading(at: 1)
+        
+        XCTAssertEqual(loader.loadedImageUrl, [image0.imageURL, image1.imageURL])
+        
+        loader.failedToCompleteLoadingImage(at: 0)
+        
+        view0.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageUrl, [image0.imageURL, image1.imageURL,image0.imageURL])
+        
+        loader.failedToCompleteLoadingImage(at: 1)
+        
+        view1.simulateRetryAction()
+        XCTAssertEqual(loader.loadedImageUrl, [image0.imageURL, image1.imageURL,image0.imageURL, image1.imageURL])
+    }
+    
     //MARK:- LOADERSPY
     class LoaderSpy: FeedLoader, FeedImageLoader {
         
@@ -453,6 +480,11 @@ private extension FeedImageCell {
         
         return !feedRetryButton.isHidden
     }
+    
+    func simulateRetryAction() {
+        
+        feedRetryButton.simulateTap()
+    }
 }
 
 
@@ -466,5 +498,16 @@ private extension UIImage {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return img!
+    }
+}
+
+
+private extension UIButton {
+    func simulateTap() {
+        allTargets.forEach { target in
+            actions(forTarget: target, forControlEvent: .touchUpInside)?.forEach {
+                (target as NSObject).perform(Selector($0))
+            }
+        }
     }
 }
