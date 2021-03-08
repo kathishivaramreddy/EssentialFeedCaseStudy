@@ -19,22 +19,15 @@ final class FeedRefreshViewModel {
     
     
     //Observer
-    var onChange: ((FeedRefreshViewModel) -> Void)?
+    var onStateLoadChange: ((Bool) -> Void)?
     
     //Accessor to view for state
-    
-    private(set) var isLoading: Bool = false {
-        didSet {
-            
-            self.onChange?(self)
-        }
-    }
     
     var onFeedLoad: (([FeedImage]) -> Void)?
 
     public func loadFeed() {
         
-        isLoading = true
+        onStateLoadChange?(true)
         loader?.load{ [weak self] result in
             
             switch result {
@@ -44,7 +37,7 @@ final class FeedRefreshViewModel {
                 case .failure:
                     break
             }
-            self?.isLoading = false
+            self?.onStateLoadChange?(false)
         }
     }
 }
