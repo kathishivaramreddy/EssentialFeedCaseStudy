@@ -33,6 +33,7 @@
 		F7C6540125F632C600A5032D /* FeedRefreshViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C6540025F632C600A5032D /* FeedRefreshViewModel.swift */; };
 		F7C6540825F67AB900A5032D /* FeedImageCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C6540725F67AB900A5032D /* FeedImageCellViewModel.swift */; };
 		F7C6540F25F67CCF00A5032D /* FeedUIComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C6540E25F67CCF00A5032D /* FeedUIComposer.swift */; };
+		F7C6541C25F6A43C00A5032D /* FeedRefreshPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C6541B25F6A43C00A5032D /* FeedRefreshPresenter.swift */; };
 		F7D605A425C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D605A325C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift */; };
 		F7FC02B125B8B0BE009A0826 /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */; };
 		F7FC02B825B8B0BE009A0826 /* EssentialFeed.h in Headers */ = {isa = PBXBuildFile; fileRef = F7FC02AA25B8B0BD009A0826 /* EssentialFeed.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -102,6 +103,7 @@
 		F7C6540025F632C600A5032D /* FeedRefreshViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRefreshViewModel.swift; sourceTree = "<group>"; };
 		F7C6540725F67AB900A5032D /* FeedImageCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCellViewModel.swift; sourceTree = "<group>"; };
 		F7C6540E25F67CCF00A5032D /* FeedUIComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIComposer.swift; sourceTree = "<group>"; };
+		F7C6541B25F6A43C00A5032D /* FeedRefreshPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRefreshPresenter.swift; sourceTree = "<group>"; };
 		F7D605A325C1FBF400B2AE07 /* CacheFeedUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheFeedUseCaseTests.swift; sourceTree = "<group>"; };
 		F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = EssentialFeed.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F7FC02AA25B8B0BD009A0826 /* EssentialFeed.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EssentialFeed.h; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 		F712C7F825ED7A8900FE66C3 /* EssentialFeediOS */ = {
 			isa = PBXGroup;
 			children = (
+				F7C6541A25F6A40900A5032D /* Feed Presenter */,
 				F7C653D425F543D600A5032D /* View */,
 				F7C653CE25F543C800A5032D /* Controller */,
 				F712C7FA25ED7A8900FE66C3 /* Info.plist */,
@@ -204,9 +207,7 @@
 				F7AD28C325F0213500D80437 /* FeedViewController.swift */,
 				F7C6540E25F67CCF00A5032D /* FeedUIComposer.swift */,
 				F7C653F925F54E8600A5032D /* FeedImageCellController.swift */,
-				F7C6540725F67AB900A5032D /* FeedImageCellViewModel.swift */,
 				F7C653F225F547B100A5032D /* FeedRefreshViewController.swift */,
-				F7C6540025F632C600A5032D /* FeedRefreshViewModel.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -218,6 +219,16 @@
 				F7C653AF25F415CB00A5032D /* FeedImageCell.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		F7C6541A25F6A40900A5032D /* Feed Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				F7C6540025F632C600A5032D /* FeedRefreshViewModel.swift */,
+				F7C6540725F67AB900A5032D /* FeedImageCellViewModel.swift */,
+				F7C6541B25F6A43C00A5032D /* FeedRefreshPresenter.swift */,
+			);
+			path = "Feed Presenter";
 			sourceTree = "<group>";
 		};
 		F7D605A225C1FBD300B2AE07 /* Feed Cache */ = {
@@ -544,6 +555,7 @@
 				F7C653E225F5440500A5032D /* FeedImageTaskLoader.swift in Sources */,
 				F7C653C825F4D55F00A5032D /* UIView+Shimmering.swift in Sources */,
 				F7C6540F25F67CCF00A5032D /* FeedUIComposer.swift in Sources */,
+				F7C6541C25F6A43C00A5032D /* FeedRefreshPresenter.swift in Sources */,
 				F7C653F325F547B100A5032D /* FeedRefreshViewController.swift in Sources */,
 				F7C653FA25F54E8600A5032D /* FeedImageCellController.swift in Sources */,
 				F7C6540125F632C600A5032D /* FeedRefreshViewModel.swift in Sources */,
