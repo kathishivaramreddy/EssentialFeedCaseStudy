@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import EssentialFeed
 
 public class FeedViewController: UITableViewController, UITableViewDataSourcePrefetching {
         
