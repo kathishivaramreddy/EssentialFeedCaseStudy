@@ -25,6 +25,7 @@
 		F7AD28C425F0213500D80437 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AD28C325F0213500D80437 /* FeedViewController.swift */; };
 		F7ADBF7E25F7346400FA03DD /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7ADBF7D25F7346400FA03DD /* Feed.storyboard */; };
 		F7ADBF9625F7F0B800FA03DD /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7ADBF9825F7F0B800FA03DD /* Feed.strings */; };
+		F7ADBFA525F7F1FA00FA03DD /* FeedLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ADBFA425F7F1FA00FA03DD /* FeedLocalizationTests.swift */; };
 		F7C653A925F4120B00A5032D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */; };
 		F7C653B625F4169500A5032D /* FeedImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C653AF25F415CB00A5032D /* FeedImageCell.swift */; };
 		F7C653C825F4D55F00A5032D /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C653C125F4D47900A5032D /* UIView+Shimmering.swift */; };
@@ -99,6 +100,7 @@
 		F7ADBF7D25F7346400FA03DD /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
 		F7ADBF9725F7F0B800FA03DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		F7ADBF9E25F7F0FC00FA03DD /* hi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = hi; path = hi.lproj/Feed.strings; sourceTree = "<group>"; };
+		F7ADBFA425F7F1FA00FA03DD /* FeedLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedLocalizationTests.swift; sourceTree = "<group>"; };
 		F7C653AF25F415CB00A5032D /* FeedImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCell.swift; sourceTree = "<group>"; };
 		F7C653C125F4D47900A5032D /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		F7C653DA25F543EC00A5032D /* FeedImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageLoader.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 			children = (
 				F712C80625ED7A8900FE66C3 /* Info.plist */,
 				F7AD28B625EFD43F00D80437 /* FeedUIIntegrationTests.swift */,
+				F7ADBFA425F7F1FA00FA03DD /* FeedLocalizationTests.swift */,
 			);
 			path = EssentialFeediOSTests;
 			sourceTree = "<group>";
@@ -582,6 +585,7 @@
 			files = (
 				F7AD28BD25F011C500D80437 /* XCTest+MemoryLeak.swift in Sources */,
 				F7AD28B725EFD43F00D80437 /* FeedUIIntegrationTests.swift in Sources */,
+				F7ADBFA525F7F1FA00FA03DD /* FeedLocalizationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
