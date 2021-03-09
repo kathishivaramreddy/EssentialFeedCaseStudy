@@ -35,7 +35,7 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
     
     public override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
-        return self.getCellController(forRowAt: indexPath).view()
+        return self.getCellController(forRowAt: indexPath).view(in: tableView)
     }
     
     public override func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {

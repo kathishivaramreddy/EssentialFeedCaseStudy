@@ -17,9 +17,9 @@ final public class FeedImageCellController {
         self.cellViewModel = cellViewModel
     }
     
-    public func view() -> UITableViewCell {
+    public func view(in tableView: UITableView) -> UITableViewCell {
                 
-        let cell = FeedImageCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "FeedImageCell") as! FeedImageCell
         cell.locationContainer.isHidden = cellViewModel.isLocationContainerHidden
         cell.descriptionLabel.text = cellViewModel.description
         cell.locationLabel.text = cellViewModel.location
