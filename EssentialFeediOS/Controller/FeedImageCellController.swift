@@ -11,7 +11,6 @@ import UIKit
 final public class FeedImageCellController {
     
     private var cellViewModel: FeedImageCellViewModel<UIImage>
-    
     init(cellViewModel: FeedImageCellViewModel<UIImage>) {
         
         self.cellViewModel = cellViewModel
@@ -54,7 +53,8 @@ final public class FeedImageCellController {
     }
     
     func cancel() {
-        
+
+        self.cellViewModel.onImageLoad = nil
         self.cellViewModel.cancel()
     }
 }
