@@ -113,6 +113,7 @@
                         <connections>
                             <outlet property="dataSource" destination="TAE-PD-6h9" id="CPV-zc-GtD"/>
                             <outlet property="delegate" destination="TAE-PD-6h9" id="EIh-gz-2c3"/>
+                            <outlet property="prefetchDataSource" destination="TAE-PD-6h9" id="HK0-o2-7jv"/>
                         </connections>
                     </tableView>
                 </tableViewController>
