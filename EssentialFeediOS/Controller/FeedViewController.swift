@@ -27,7 +27,6 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         refreshControl = refereshController?.refreshControl
         refereshController?.load()
         
-        title = FeedRefreshPresenter.title
         }
     
     public override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
