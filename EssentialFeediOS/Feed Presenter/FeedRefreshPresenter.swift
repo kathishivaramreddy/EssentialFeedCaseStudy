@@ -41,6 +41,11 @@ final class FeedRefreshPresenter {
     var feedView: FeedView?
     var loadingView: FeedLoadingView?
     
+    static var title: String {
+        
+        return "My Feed"
+    }
+    
     public func loadFeed() {
         
         loadingView?.display(viewModel: FeedLoadingViewModel(isLoading: true))
