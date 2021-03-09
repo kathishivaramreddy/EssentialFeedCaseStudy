@@ -26,7 +26,13 @@ final public class FeedImageCellController {
         
         cellViewModel.onImageLoad = { [weak cell] image in
             
+            cell?.feedImageView.alpha = 0
             cell?.feedImageView.image = image
+            
+            UIView.animate(withDuration: 0.25) {
+                
+                cell?.feedImageView.alpha = 1
+            }
         }
         
         cellViewModel.onImageLoadingStateChange = { [weak cell] isLoading in
