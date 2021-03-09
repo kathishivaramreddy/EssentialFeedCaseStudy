@@ -20,12 +20,6 @@ public class FeedViewController: UITableViewController, UITableViewDataSourcePre
         }
     }
     
-    convenience init(refreshViewController: FeedRefreshViewController) {
-        
-        self.init()
-        self.refereshController = refreshViewController
-    }
-    
     public override func viewDidLoad() {
         
         super.viewDidLoad()
