@@ -43,7 +43,10 @@ final class FeedRefreshPresenter {
     
     static var title: String {
         
-        return "My Feed"
+        return NSLocalizedString("Feed_View_Title"
+                                 , tableName: "Feed"
+                                 , bundle: Bundle(for: FeedRefreshPresenter.self)
+                                 , comment: "localized string value")
     }
     
     public func loadFeed() {
