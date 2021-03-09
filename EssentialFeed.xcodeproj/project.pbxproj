@@ -24,7 +24,7 @@
 		F7AD28BD25F011C500D80437 /* XCTest+MemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7FC02FF25BBF091009A0826 /* XCTest+MemoryLeak.swift */; };
 		F7AD28C425F0213500D80437 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7AD28C325F0213500D80437 /* FeedViewController.swift */; };
 		F7ADBF7E25F7346400FA03DD /* Feed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F7ADBF7D25F7346400FA03DD /* Feed.storyboard */; };
-		F7ADBF8B25F7EB3B00FA03DD /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7ADBF8A25F7EB3B00FA03DD /* Feed.strings */; };
+		F7ADBF9625F7F0B800FA03DD /* Feed.strings in Resources */ = {isa = PBXBuildFile; fileRef = F7ADBF9825F7F0B800FA03DD /* Feed.strings */; };
 		F7C653A925F4120B00A5032D /* EssentialFeed.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7FC02A725B8B0BD009A0826 /* EssentialFeed.framework */; };
 		F7C653B625F4169500A5032D /* FeedImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C653AF25F415CB00A5032D /* FeedImageCell.swift */; };
 		F7C653C825F4D55F00A5032D /* UIView+Shimmering.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7C653C125F4D47900A5032D /* UIView+Shimmering.swift */; };
@@ -97,7 +97,7 @@
 		F7AD28B625EFD43F00D80437 /* FeedUIIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedUIIntegrationTests.swift; sourceTree = "<group>"; };
 		F7AD28C325F0213500D80437 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		F7ADBF7D25F7346400FA03DD /* Feed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Feed.storyboard; sourceTree = "<group>"; };
-		F7ADBF8A25F7EB3B00FA03DD /* Feed.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Feed.strings; sourceTree = "<group>"; };
+		F7ADBF9725F7F0B800FA03DD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Feed.strings; sourceTree = "<group>"; };
 		F7C653AF25F415CB00A5032D /* FeedImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageCell.swift; sourceTree = "<group>"; };
 		F7C653C125F4D47900A5032D /* UIView+Shimmering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shimmering.swift"; sourceTree = "<group>"; };
 		F7C653DA25F543EC00A5032D /* FeedImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedImageLoader.swift; sourceTree = "<group>"; };
@@ -232,7 +232,7 @@
 				F7C6540025F632C600A5032D /* FeedRefreshViewModel.swift */,
 				F7C6540725F67AB900A5032D /* FeedImageCellViewModel.swift */,
 				F7C6541B25F6A43C00A5032D /* FeedRefreshPresenter.swift */,
-				F7ADBF8A25F7EB3B00FA03DD /* Feed.strings */,
+				F7ADBF9825F7F0B800FA03DD /* Feed.strings */,
 			);
 			path = "Feed Presenter";
 			sourceTree = "<group>";
@@ -520,7 +520,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F7ADBF8B25F7EB3B00FA03DD /* Feed.strings in Resources */,
+				F7ADBF9625F7F0B800FA03DD /* Feed.strings in Resources */,
 				F7ADBF7E25F7346400FA03DD /* Feed.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -647,6 +647,17 @@
 			targetProxy = F7FC033425BC144D009A0826 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F7ADBF9825F7F0B800FA03DD /* Feed.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F7ADBF9725F7F0B800FA03DD /* en */,
+			);
+			name = Feed.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F712C80825ED7A8900FE66C3 /* Debug */ = {
